@@ -9,6 +9,7 @@ import java.util.function.Function;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -22,11 +23,10 @@ public class JWTUtils {
     private SecretKey Key;
     private static final long EXPIRATION_TIME = 18000000; //5 hours by milisecond 18000000
 
-    // @Value("${jwtKey}")
-    // String secretString;
+    @Value("${jwt.key}")
+    private String secretString;
     
     public JWTUtils() {
-        String secretString = "cobadulusecretstringininanticobapanggildariapplicationproperties";
 
         byte[] keyBytes = Base64.getDecoder().decode(secretString.getBytes(StandardCharsets.UTF_8));
 
