@@ -27,22 +27,22 @@ public class JWTUtils {
     @Value("${jwt.key}")
     private String secretString;
     
-    public JWTUtils() {
+    // public JWTUtils() {
 
-        byte[] keyBytes = Base64.getDecoder().decode(secretString.getBytes(StandardCharsets.UTF_8));
+    //     byte[] keyBytes = Base64.getDecoder().decode(secretString.getBytes(StandardCharsets.UTF_8));
 
-        this.Key = new SecretKeySpec(keyBytes, "HmacSHA256");
-    } 
+    //     this.Key = new SecretKeySpec(keyBytes, "HmacSHA256");
+    // } 
 
-    // @PostConstruct
-    // public void init() {
-    //     try {
-    //         byte[] keyBytes = Base64.getDecoder().decode(secretString.getBytes(StandardCharsets.UTF_8));
-    //         this.Key = new SecretKeySpec(keyBytes, "HmacSHA256");
-    //     } catch (IllegalArgumentException e) {
-    //         throw new RuntimeException("Invalid Base64 encoded secret key", e);
-    //     }
-    // }
+    @PostConstruct
+    public void init() {
+        try {
+            byte[] keyBytes = Base64.getDecoder().decode(secretString.getBytes(StandardCharsets.UTF_8));
+            this.Key = new SecretKeySpec(keyBytes, "HmacSHA256");
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid Base64 encoded secret key", e);
+        }
+    }
     
     public String generateToken(UserDetails userDetails){
         return Jwts.builder()
