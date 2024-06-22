@@ -10,7 +10,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://localhost:3000", "localhost:3000")
+            .allowedOrigins("http://localhost:3000", "localhost:3000", "https://www.erealdeposit.com", "https://erealdeposit.com")
             .allowCredentials(true)
             .allowedMethods("GET", "POST", "PUT", "DELETE")
             .allowedHeaders("Access-Control-Allow-Headers", "Access-Control-Allow-Origin", "access-control-allow-origin, access-control-allow-headers", "Content-Type", "Accept", "Origin", "pajak-sppd", "Access-Control-Allow-Credentials")
